@@ -1,14 +1,15 @@
 import "./App.css";
-// import ReactDom from "react-dom";
-import Button from "@mui/material/Button";
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <form>
-        <h1>Login</h1>
-        <Button variant="contained">Login</Button>
-      </form>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </>
   );
 }

@@ -2,15 +2,20 @@
   "users": [
     {
       "id": 1,
-      "name": "Antonio"
+      "username": "Antonio",
+      "password": ""
     },
     {
-      "name": "John",
-      "id": 47
+      "id": 2,
+      "username": "John",
+      "password": ""
+      
     },
     {
-      "name": "Marcus",
-      "id": 49
+      "id": 3,
+      "username": "Marcus",
+      "password": ""
+      
     }
   ]
 }
