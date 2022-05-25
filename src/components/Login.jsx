@@ -1,19 +1,70 @@
 import React from "react";
+import Button from "@mui/material/Button";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const initialValues = {
+  username: "",
+  password: "",
+};
+
+const onSubmit = (values) => {
+  console.log("form data", values);
+};
+
+const validationSchema = Yup.object({
+  username: Yup.string().required("Please enter a username!"),
+  password: Yup.string().required("Please enter a password!"),
+});
 
 export function Login() {
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit,
+  //   validationSchema,
+  // });
+
+  // console.log("Visited", formik.touched);
+
   return (
     <>
       <h1>Welcome to login page</h1>
-      <form>
-        <label htmlFor="username">Username</label>
-        <input type="text" id="username" name="username" />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        <Form>
+          <div className="form-control">
+            <label htmlFor="username">Username</label>
+            <Field
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+            />
+            <ErrorMessage name="username">
+              {(errorMsg) => <div className="error">{errorMsg}</div>}
+            </ErrorMessage>
+          </div>
 
-        <label htmlFor="password">Password</label>
-        <input type="text" id="password" name="password" />
-
-        <label htmlFor="email">E-mail</label>
-        <input type="email" id="email" name="email" />
-      </form>
+          <div className="form-control">
+            <label htmlFor="password">Password</label>
+            <Field
+              type="text"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+            />
+            <ErrorMessage name="password">
+              {(errorMsg) => <div className="error">{errorMsg}</div>}
+            </ErrorMessage>
+          </div>
+          <Button variant="contained" type="submit">
+            Login
+          </Button>
+        </Form>
+      </Formik>
     </>
   );
 }
