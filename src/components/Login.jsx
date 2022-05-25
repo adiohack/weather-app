@@ -9,7 +9,7 @@ const initialValues = {
 };
 
 const onSubmit = (values) => {
-  console.log("form data", values);
+  console.log("form data", values); //I leave this for the useState case
 };
 
 const validationSchema = Yup.object({
@@ -18,17 +18,10 @@ const validationSchema = Yup.object({
 });
 
 export function Login() {
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit,
-  //   validationSchema,
-  // });
-
-  // console.log("Visited", formik.touched);
-
   return (
     <>
       <h1>Welcome to login page</h1>
+      <h2>Now lets get logged in</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -60,9 +53,19 @@ export function Login() {
               {(errorMsg) => <div className="error">{errorMsg}</div>}
             </ErrorMessage>
           </div>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" className="btn">
             Login
           </Button>
+          <div>
+            <Button
+              variant="contained"
+              color="secondary"
+              href="/"
+              className="btn"
+            >
+              Go back
+            </Button>
+          </div>
         </Form>
       </Formik>
     </>
