@@ -7,8 +7,6 @@ export function Weather(props) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // console.log("weather", lat, lng);
-
   const call = useCallback(() => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=1830547449e6cf56a84edf5ddf35bd84`;
 
