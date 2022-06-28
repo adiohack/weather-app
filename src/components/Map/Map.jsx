@@ -29,7 +29,7 @@ export function Map(props) {
         onNewCoords({
           lat: map.current.getCenter().lat.toFixed(4),
           lng: map.current.getCenter().lng.toFixed(4),
-          zoome: map.current.getZoom().zoom.toFixed(2),
+          zoome: map.current.getZoom().toFixed(2),
         });
     });
   });
