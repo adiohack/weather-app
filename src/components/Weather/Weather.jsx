@@ -4,7 +4,7 @@ import debounce from "../../lib/debounce";
 export function Weather(props) {
   const { coords } = props;
   const { lat, lng } = coords;
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const call = useCallback(() => {
@@ -37,7 +37,26 @@ export function Weather(props) {
     <>
       <h1>Weather</h1>
       {loading && <h2>Loading location weather info !</h2>}
-      {!loading && data && JSON.stringify(data)}
+      {!loading && data && console.log(data)}
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>country</th>
+            <th>clouds</th>
+            <th>weather</th>
+            <th>temp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{data.name}</td>
+            {/* <td>{JSON.stringify(data.sys.country)}</td> */}
+            <td>Parco Foreste Casentinesi</td>
+            <td>temp</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 }
