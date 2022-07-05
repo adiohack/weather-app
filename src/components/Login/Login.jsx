@@ -11,6 +11,9 @@ const initialValues = {
 
 const onSubmit = (values) => {
   console.log("form data", values); //I leave this for the useState case
+  fetch("http://localhost:3001/users")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 };
 
 const validationSchema = Yup.object({
@@ -36,6 +39,7 @@ export function Login() {
                 type="text"
                 id="username"
                 name="username"
+                autoComplete="off"
                 placeholder="Enter your username"
               />
               <ErrorMessage name="username">
@@ -46,9 +50,10 @@ export function Login() {
             <div className="form-control">
               <label htmlFor="password">Password</label>
               <Field
-                type="text"
+                type="password"
                 id="password"
                 name="password"
+                autoComplete="off"
                 placeholder="Enter your password"
               />
               <ErrorMessage name="password">

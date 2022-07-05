@@ -3,19 +3,17 @@
     {
       "id": 1,
       "username": "Antonio",
-      "password": ""
+      "password": "antonio"
     },
     {
       "id": 2,
       "username": "John",
       "password": ""
-      
     },
     {
       "id": 3,
       "username": "Marcus",
       "password": ""
-      
     }
   ]
 }

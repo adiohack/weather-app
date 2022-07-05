@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import debounce from "../../lib/debounce";
+import "./weather.css";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import PublicIcon from "@mui/icons-material/Public";
+import ThermostatIcon from "@mui/icons-material/Thermostat";
+import AirIcon from "@mui/icons-material/Air";
 
 export function Weather(props) {
   const { coords } = props;
@@ -36,27 +41,25 @@ export function Weather(props) {
   return (
     <>
       <h1>Weather</h1>
-      {loading && <h2>Loading location weather info !</h2>}
-      {!loading && data && console.log(data)}
-      <table>
-        <thead>
-          <tr>
-            <th>name</th>
-            <th>country</th>
-            <th>clouds</th>
-            <th>weather</th>
-            <th>temp</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{data.name}</td>
-            {/* <td>{JSON.stringify(data.sys.country)}</td> */}
-            <td>Parco Foreste Casentinesi</td>
-            <td>temp</td>
-          </tr>
-        </tbody>
-      </table>
+      {loading && <span>Loading location weather info !</span>}
+      <div className="weather-info">
+        <div className="weather-box">
+          <LocationCityIcon fontSize="large" />
+          <p>City: {data.name}</p>
+        </div>
+        <div className="weather-box">
+          <PublicIcon fontSize="large" />
+          <p>Country: {data.sys && data.sys.country}</p>
+        </div>
+        <div className="weather-box">
+          <AirIcon fontSize="large" />
+          <p>Weather: {data.weather && data.weather[0].description}</p>
+        </div>
+        <div className="weather-box">
+          <ThermostatIcon fontSize="large" />
+          <p>Temp: {data.main && data.main.temp}</p>
+        </div>
+      </div>
     </>
   );
 }
