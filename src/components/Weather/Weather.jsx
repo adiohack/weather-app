@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import debounce from "../../lib/debounce";
 import "./weather.css";
-import LocationCityIcon from "@mui/icons-material/LocationCity";
-import PublicIcon from "@mui/icons-material/Public";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
-import AirIcon from "@mui/icons-material/Air";
 
 export function Weather(props) {
   const { coords } = props;
@@ -13,7 +9,7 @@ export function Weather(props) {
   const [loading, setLoading] = useState(false);
 
   const call = useCallback(() => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=1830547449e6cf56a84edf5ddf35bd84`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=1830547449e6cf56a84edf5ddf35bd84&units=metric`;
 
     fetch(url)
       .then((response) => {
@@ -43,21 +39,46 @@ export function Weather(props) {
       <h1>Weather</h1>
       {loading && <span>Loading location weather info !</span>}
       <div className="weather-info">
-        <div className="weather-box">
-          <LocationCityIcon fontSize="large" />
-          <p>City: {data.name}</p>
-        </div>
-        <div className="weather-box">
-          <PublicIcon fontSize="large" />
-          <p>Country: {data.sys && data.sys.country}</p>
-        </div>
-        <div className="weather-box">
-          <AirIcon fontSize="large" />
-          <p>Weather: {data.weather && data.weather[0].description}</p>
-        </div>
-        <div className="weather-box">
-          <ThermostatIcon fontSize="large" />
-          <p>Temp: {data.main && data.main.temp}</p>
+        <div className="weather-up">
+          <div>
+            <p className="weather-city">City: {data.name}</p>
+            <p className="weather-desc">
+              {data.weather && data.weather[0].description}
+            </p>
+          </div>
+          <img
+            src={data.weather && `icons/${data.weather[0].icon}.png`}
+            alt="icon"
+            className="weather-icon"
+          />
+          <div className="weather-down">
+            <p className="weather-temp">
+              {data.main && Math.round(data.main.temp)}°C
+            </p>
+            <div className="details">
+              <div className="p-row">
+                <p className="p-label top">Details</p>
+              </div>
+              <div className="p-row">
+                <p className="p-label">Feels like</p>
+                <p className="p-value">
+                  {data.main && Math.round(data.main.feels_like)}°C
+                </p>
+              </div>
+              <div className="p-row">
+                <p className="p-label">Humidity</p>
+                <p className="p-value">{data.main && data.main.humidity}%</p>
+              </div>
+              <div className="p-row">
+                <p className="p-label">Wind</p>
+                <p className="p-value">{data.wind && data.wind.speed} m/s</p>
+              </div>
+              <div className="p-row">
+                <p className="p-label">Pressure</p>
+                <p className="p-value">{data.main && data.main.pressure} hPa</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
